@@ -24,3 +24,4 @@ Banking is bigger than ever before, with new institutions emerging, data science
 # Data origin
 
 [_Bank Customer Churn Data from Kaggle_](https://www.kaggle.com/puneet6060/intel-image-classification)
+
