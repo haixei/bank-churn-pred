@@ -10,11 +10,13 @@ Banking is bigger than ever before, with new institutions emerging, data science
 
 ## Table of contents
 
-- [Introduction & Analysis]()
-  - [Goals]()
-  - [Which customers are more likely to leave?]()
-  - [How can we use analysed data to make action?]()
-- [Making predictions]()
+- [Introduction & Analysis](/docs/eda.md)
+  - [Introduction](/docs/eda.md#data-analysis--data-driven-decisions)
+  - [Data analysis, plotting](/docs/eda.md#exploratory-data-analysis)
+  - [Which customers are more likely to leave? Conclusion.](/docs/eda.md#conclusion)
+  - [How can we use analysed data to make action?](/docs/eda.md#what-next)
+- [Making predictions](/docs/predictions.md)
+  - [Processing the data]()
   - [Setting up the model]()
   - [Evaluating the performance]()
 

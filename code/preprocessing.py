@@ -5,7 +5,6 @@ from eda import data
 from lightgbm import LGBMClassifier
 from sklearn.model_selection import GridSearchCV, RepeatedKFold, train_test_split
 from sklearn.metrics import classification_report, plot_roc_curve, accuracy_score
-import matplotlib.pyplot as plt
 import plotly.express as pltx
 import pandas as pd
 
@@ -92,9 +91,9 @@ pipeline = Pipeline(steps=[('preprocessor', preprocessor), ('model', model)])
 
 # Set up grid search
 param_grid = {
-    'model__n_estimators': [100, 300],
-    'model__num_leaves': [30, 150],
-    'model__learning_rate': [0.01, 0.001]
+    'model__n_estimators': [300, 500],
+    'model__num_leaves': [15, 30, 150],
+    'model__learning_rate': [0.01]
 }
 
 cv = RepeatedKFold(n_splits=5, n_repeats=5, random_state=24)
@@ -133,4 +132,4 @@ feat_imp = pd.Series(lgbm.best_estimator_.named_steps['model'].feature_importanc
                      index=feat_index.columns[:-5]).sort_values(ascending=False)
 
 feat_imp_fig = pltx.bar(x=feat_imp, y=feat_imp.index, title='Top 5 features (importance)', color_discrete_sequence=['#764bcc'])
-feat_imp_fig.show()
+# >> feat_imp_fig.show()

@@ -76,8 +76,7 @@ preprocessor = ColumnTransformer(
 model = LGBMClassifier(
         max_bin=250,
         boosting_type='dart',
-        max_depth=10,
-        max_delta_step=2
+        max_depth=10
 )
 
 my_pipeline = Pipeline(steps=[('preprocessor', preprocessor),
@@ -104,18 +103,35 @@ gs = GridSearchCV(estimator=pipeline, param_grid=param_grid, cv=cv)
 
 
 
-### 5) Train the model
+## Training the model
 
-It's time to train the model and evaluate its performance. For this task I'm going to use a AUC curve as well as some other metrics. I also want to plot the mean test score from the cross validation.
+It's time to train the model and evaluate its performance. For this task I'm going to use a AUC curve as well as some other metrics. I also want to plot the mean test score from the cross validation. Our final evaluation look like the following:
 
-```
+```Python
               precision    recall  f1-score   support
 
            0       0.88      0.96      0.92      1607
-           1       0.75      0.46      0.57       393
+           1       0.74      0.46      0.57       393
 
     accuracy                           0.86      2000
    macro avg       0.81      0.71      0.74      2000
 weighted avg       0.85      0.86      0.85      2000
 ```
+
+```Python
+# Insights
+AUC:  0.8625
+Mean CV test score:  [0.84885 0.84875 0.861   0.85595 0.7945  0.7945  0.7945  0.7945 ]
+Best estimator:  {'model__learning_rate': 0.01, 'model__n_estimators': 300, 'model__num_leaves': 30}
+```
+
+![ROC curve](./plots/roc.png)
+
+
+
+Here we can see the ROC curve. We can see that the model although with fewer features, still performs pretty well and we're easily getting accuracy close to 0.87. I looked into a few models created by other analysts and their scores were around 0.75-0.85 so I will note this result as a success.
+
+![ROC curve](./plots/mean-test-score.png)
+
+![ROC curve](./plots/top-features.png)
 
