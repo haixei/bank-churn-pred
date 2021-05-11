@@ -4,9 +4,10 @@ from sklearn.compose import ColumnTransformer
 from eda import data
 from lightgbm import LGBMClassifier
 from sklearn.model_selection import GridSearchCV, RepeatedKFold, train_test_split
-from sklearn.metrics import classification_report, plot_roc_curve, roc_auc_score
+from sklearn.metrics import classification_report, plot_roc_curve, accuracy_score
 import matplotlib.pyplot as plt
 import plotly.express as pltx
+import pandas as pd
 
 # Explore the information about the data set
 print(data.info())
@@ -82,10 +83,9 @@ preprocessor = ColumnTransformer(
 
 # Create the model
 model = LGBMClassifier(
-        learning_rate=0.01,
         max_bin=250,
-        boosting_type='goss',
-        max_depth=5
+        boosting_type='dart',
+        max_depth=10
 )
 
 pipeline = Pipeline(steps=[('preprocessor', preprocessor), ('model', model)])
@@ -93,7 +93,8 @@ pipeline = Pipeline(steps=[('preprocessor', preprocessor), ('model', model)])
 # Set up grid search
 param_grid = {
     'model__n_estimators': [100, 300],
-    'model__num_leaves': [10, 30, 40]
+    'model__num_leaves': [30, 150],
+    'model__learning_rate': [0.01, 0.001]
 }
 
 cv = RepeatedKFold(n_splits=5, n_repeats=5, random_state=24)
@@ -107,19 +108,29 @@ y_pred = lgbm.predict(X_test)
 # Get the report on accuracy and AUC
 print(classification_report(y_test, y_pred, digits=2))
 
-# Plot the heatmap
-fig = pltx.imshow(data,
-                  labels=dict(x="Churn Confusion Matrix", color="Acc"),
-                  x=['Non Churn', 'Churn'],
-                  y=['Non Churn', 'Churn'],
-                  color_continuous_scale='Purpor')
-
 # Plot the AUC
-plot_roc_curve(y_test, y_pred)
-plt.show()
+y_pred_proba = lgbm.predict_proba(X_test)
+plot_roc_curve(lgbm, X_test, y_test)
+# >> plt.show()
 
 # Get the accuracy score
-print('AUC: ', roc_auc_score(y_test, y_pred))
-print('CV Results: ', lgbm.cv_results_)
-print('Best CV score: ', lgbm.scorer_)
+mean_score = lgbm.cv_results_['mean_test_score']
+print('AUC: ', accuracy_score(y_test, y_pred))
+print('Mean CV test score: ', mean_score)
 print('Best estimator: ', lgbm.best_params_)
+
+# Plot the cv scores
+mean_labels = []
+for i in range(len(mean_score)):
+    mean_labels.append(i+1)
+
+mean_fig = pltx.line(x=mean_labels, y=mean_score, title=f'Mean test score: {round(mean_score.mean(), 3)}')
+# >> mean_fig.show()
+
+# Plot feature importance
+feat_index = X_train.loc[:, X_train.columns]
+feat_imp = pd.Series(lgbm.best_estimator_.named_steps['model'].feature_importances_[:-8],
+                     index=feat_index.columns[:-5]).sort_values(ascending=False)
+
+feat_imp_fig = pltx.bar(x=feat_imp, y=feat_imp.index, title='Top 5 features (importance)', color_discrete_sequence=['#764bcc'])
+feat_imp_fig.show()

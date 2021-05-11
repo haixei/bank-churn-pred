@@ -74,8 +74,10 @@ preprocessor = ColumnTransformer(
 
 # Create the model
 model = LGBMClassifier(
-        max_bin=200,
-        boosting_type='goss'
+        max_bin=250,
+        boosting_type='dart',
+        max_depth=10,
+        max_delta_step=2
 )
 
 my_pipeline = Pipeline(steps=[('preprocessor', preprocessor),
@@ -91,9 +93,9 @@ Grid search is going to help us find the best parameters for our model. In this 
 ```Python
 # Set up grid search
 param_grid = {
-    'learning_rate': [0.1, 0.05],
-    'num_iterations': [100, 300],
-    'num_leaves': [10, 30, 40]
+    'model__n_estimators': [100, 300, 500],
+    'model__num_leaves': [30, 150],
+    'model__learning_rate': [0.01, 0.001]
 }
 
 cv = RepeatedKFold(n_splits=5, n_repeats=5, random_state=24)
@@ -103,4 +105,17 @@ gs = GridSearchCV(estimator=pipeline, param_grid=param_grid, cv=cv)
 
 
 ### 5) Train the model
+
+It's time to train the model and evaluate its performance. For this task I'm going to use a AUC curve as well as some other metrics. I also want to plot the mean test score from the cross validation.
+
+```
+              precision    recall  f1-score   support
+
+           0       0.88      0.96      0.92      1607
+           1       0.75      0.46      0.57       393
+
+    accuracy                           0.86      2000
+   macro avg       0.81      0.71      0.74      2000
+weighted avg       0.85      0.86      0.85      2000
+```
 
