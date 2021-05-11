@@ -9,9 +9,6 @@ data = data.drop(['CustomerId', 'RowNumber', 'Surname'], axis=1)
 print(data.head())
 print(data.describe())
 
-# Explore the skewness
-print('Skewness:', data.skew())
-
 # Correlation between the features
 corr = data.corr()
 corr_fig = pltx.imshow(corr, color_continuous_scale='Purpor')
@@ -56,4 +53,4 @@ hist_fig = ff.create_distplot(hist_data, hist_labels, colors=['#fd80ff', '#6f4ff
                          bin_size=.2, show_rug=False)
 
 hist_fig.update_layout(title_text='CreditScore histogram')
-hist_fig.show()
+# >> hist_fig.show()
