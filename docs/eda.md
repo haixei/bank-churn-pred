@@ -35,17 +35,17 @@ I'm going to plot the continuous values with box-violin plots next to a scatter 
 
 ### _1) Correlation_
 
-![Correlation heatmap](/plots/correlation.png)
+![Correlation heatmap](./plots/correlation.png)
 
 On the correlation heatmap above we can see that age is in fact, the biggest factor when it comes to closing the bank account, on the second place we have the balance. One feature that has the lowest possible correlation to the Exited feature is IsActiveMember, it might not contribute a lot to our predictions but if you look closer it has a closer relation to the age and it might be something we're looking for. If customers in a certain age group stay or leave because of something that is related to the membership, we could use this information to make changes in the future. For example the base offer of the bank is not satisfying unless a person has a membership, but the membership has requirements, it might limit the amount of people who decide to stay.
 
 
 
-![Correlation lines for customers who left the bank](/plots/correlation-2.png)
+![Correlation lines for customers who left the bank](./plots/correlation-2.png)
 
-![Correlation lines for the number of products](/plots/correlation-3.png)
+![Correlation lines for the number of products](./plots/correlation-3.png)
 
-![Correlation lines for the minimum age in a age group](/plots/correlation-4.png)
+![Correlation lines for the minimum age in a age group](./plots/correlation-4.png)
 
 
 
@@ -57,47 +57,47 @@ I also wanted to plot some correlations in this form, it looks a little bit diff
 
 Now I'm going to take care of creating graphs for correlation between our features and the target that is 'Exited'. I'm starting with the continuous features and then moving into categorical/discrete ones. For the first ones I will be using a box plot with scatter to help us notice small but important changes.
 
-![Box plot for balance](/plots/exited-balance.png)
+![Box plot for balance](./plots/exited-balance.png)
 
 We're starting with graphing the target against the balance. It makes sense that people with no resources decided to leave the bank, they have no reason to stay but what could leave to them opening an account but leaving is another thing to consider. It also looks like there might be more people with higher balance who decided to leave.
 
-![Box plot for age](/plots/exited-age.png)
+![Box plot for age](./plots/exited-age.png)
 
 From this plot on the other hand, we can tell that younger people are way less likely to leave. There could be some correlation between people being older and having higher balance. It could be also related to the fact that a lot of young people opens their bank account for the first time or not have enough resources to for example put them on a savings account, in that case most banks will offer them very similar things. People with a higher age median, between 40-50 most probably have more specific view on what a bank should provide to them so they might be more inclined to leave ones that are not up their alley. People over 50 leave the least, and it could be because they already found that this bank fits them the best.
 
-![Box plot for salary](/plots/exited-salary.png)
+![Box plot for salary](./plots/exited-salary.png)
 
 Salary feature is an estimated value and informs about the possible yearly income. It seems like it has barely any relation to the customers leaving. We can only see that there is slightly more customers with higher salary who left.
 
 
 
-![Pie chart for tenure](/plots/pie-tenure.png)
+![Pie chart for tenure](./plots/pie-tenure.png)
 
 Tenure shows information on how long (in years) the customer stayed with the bank. The pie above showcases the amount of people in % with different tenures who left the bank. 10% of the customers left the bank in their first 3 years from creating the account, majority of them (~50%) left after 7 to 9 years. It's a very important information for the bank because since these were long-term customers of theirs, it might mean that something happened in that time-frame that could lead them to leaving.
 
-![Pie chart for number of products](/plots/pie-products.png)
+![Pie chart for number of products](./plots/pie-products.png)
 
 Here we can see in % how many people who used a given number of products left the bank. It seems like there is some correlation between it, most of it is made up from people who used less than 3 products offered by the bank. It could be a random thing, but it could provide some insight too. To check which one is it, I'm going to plot the total number of people who used a number of products with the % of them who left to look for correlation.
 
-![Bar plot for total amount of customers (in %) who use a given amount of product and left](/plots/product-customers.png)
+![Bar plot for total amount of customers (in %) who use a given amount of product and left](./plots/product-customers.png)
 
 From this bar plot we can extract some very significant information. Percentage of customers who used more than 3 products and left is very high, we can even see that all people who used 4 products left. It might mean that people who use these two have a strong reason to do so and when their expectations are not met, they leave. Thanks to this information the bank can go more in-depth into what the products offer and what kind of characteristics could make the customers exit.
 
 Lastly I'm going to plot a few histograms that could help us display the relationship between the amount of people of a given characteristics and their probability to leave the bank better.
 
-![Histogram for age and exit rate](/plots/hist-age-exit.png)
+![Histogram for age and exit rate](./plots/hist-age-exit.png)
 
 This histogram shows us a very important information - the older the customer the more likely they are to leave the bank. So far, the age seems to have the biggest role in the equation. 
 
 
 
-![Histogram for age and exit rate](/plots/hist-ten-exit.png)
+![Histogram for age and exit rate](./plots/hist-ten-exit.png)
 
 From the tenure histogram we can get a few insights. People who spent between 6 to 8 years with the bank are less likely to leave. People who spend 9, 1 and 0 years are the most likely to leave. This could mean that when people settle down with the bank, it works for them well but at the later point in their life it starts not to. That would connect really well to the plot before where we saw that older customers are more likely to leave. Customers who had 0-1 tenure, I assume that left because they found a different bank that fits their needs better.
 
 
 
-![Histogram for credit score and exit rate](/plots/hist-creditscore.png)
+![Histogram for credit score and exit rate](./plots/hist-creditscore.png)
 
 The last histogram I created is the one we see above - with the credit score. There is a few important takeaways. People who have a score lower than 470 are way more likely to leave than those above that number. There is also a few very big spikes later, in the middle. It seems like people who have ~620, 750 and 550 credit score are the ones most likely to leave.
 
@@ -107,23 +107,23 @@ The last histogram I created is the one we see above - with the credit score. Th
 
 Now I'm going to plot the features against each other and see if I can extract some other useful information that could possibly help with solving the business problems.
 
-![Box plot for balance against tenure](/plots/bal-ten.png)
+![Box plot for balance against tenure](./plots/bal-ten.png)
 
 It seems like the balance in the moment of saving the observation doesn't relate a lot to the time people spend with the bank. There is a few moments where we have outliers higher and lower than average. Between 2 and 4 years we can clearly see a spike in the balance. We can also see that people with less time spend with the bank have a lower balance.
 
-![Box plots for geography against age with respect to tenure](/plots/age-geo-tenure.png)
+![Box plots for geography against age with respect to tenure](./plots/age-geo-tenure.png)
 
 On this box plot we can see the relationship between where the customers opened their account and their age. Bar plots are coloured respectively to the tenure. From this plot it's easy to tell that there is way more customers from France with outliers in the older age group. People with 4 years of history with the bank seem to be younger in France and Germany, while we get more older people in the latter who have 2 years of history.
 
-![Box plots for geography against age with respect to having a credit card](/plots/age-geo-card.png)
+![Box plots for geography against age with respect to having a credit card](./plots/age-geo-card.png)
 
 When it comes to having a credit card, the relationship looks very similar for each country. The only interesting thing to notice there is that there seems to be more customers above the age of 50 in France. In general, there's a even divide between people who have and not have a card.
 
-![Box plots for geography against age with respect to having a credit card](/plots/geo-bal.png)
+![Box plots for geography against age with respect to having a credit card](./plots/geo-bal.png)
 
 On this plot on the other hand, we can get some more important insights. It's not exactly related to the churn but still something to keep in mind if the bank were to do more analysis on other features. It seems like the median of the balance is way higher in Germany than in other two countries. In France and Spain less people with a bigger balance are inclined to have a credit card. I assume it's because people with lower income must rely on repaying the credit debt more often.
 
-![Box plots for geography against balance with respect to having a credit card](/plots/geo-bal.png)
+![Box plots for geography against balance with respect to having a credit card](./plots/geo-bal.png)
 
 ## Conclusion
 
@@ -154,4 +154,4 @@ When the bank finds a solution to the question, they will target people who fall
 
 
 
-_Let's proceed to the next section where [I'm going to create the model.]()_
+_Let's proceed to the next section where [I'm going to create the model.](/docs/predictions.md)_
