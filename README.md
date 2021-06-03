@@ -1,5 +1,5 @@
-![Header](https://i.imgur.com/tdhEhuO.png)
-
+![Finished](https://i.imgur.com/hzCFhps.png)
+![ML project](https://i.imgur.com/2tQPjrr.png)
 
 
 # Bank Customer Churn Prediction & Action
